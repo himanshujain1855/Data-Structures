@@ -1,0 +1,113 @@
+/* STACK IMPLEMENTATION USING AN ARRAY
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 5
+
+// Global Variables
+static int TOS = -1;
+static int STACK[MAX];
+
+// Function Definitions
+int is_underflow()
+{
+  if(TOS == -1)
+        return 1;
+  else
+       return 0;
+}
+
+int is_overflow()
+{
+    if(TOS >= MAX-1) // else you can write like this REAR == MAX-1
+        return 1;
+    else
+        return 0;
+}
+
+int push(int value)
+{
+    if(is_overflow())
+        return 0;
+    else
+        {
+            STACK[++TOS] = value;
+            return 1;
+        }
+
+}
+
+int pop()
+{
+    if(is_underflow())
+        return 0;
+    else
+        {
+            STACK[TOS] = 0;
+            --TOS;
+            return 1;
+        }
+}
+
+int display()
+{
+    int i;
+ if(is_underflow())
+    printf("UnderFlow");
+ else
+    for(i=0;i<=TOS;i++)
+        printf("%d\n",STACK[i]);
+}
+
+// Driver Program
+int main()
+{
+        int count = 0;
+        int running = 1;
+        int choice;
+        printf("\n------------------------------------------------Welcome To Stack Implementation Using An Array-------------------------------------------------------------\n");
+            printf("Please Select Which Operation Do You Want?\n");
+            printf("1. Push\n");
+            printf("2. Pop\n");
+            printf("3. Display\n");
+            printf("4. Exit ");
+
+        while(running)
+        {
+            if(count != 0)
+                printf("Please Select Which Operation Do You Want?");
+            scanf("%d",&choice);
+
+            switch(choice)
+            {
+                case 1:
+                    {
+                        int value;
+                    printf("Enter Value");
+                    scanf("%d",&value);
+                    if(push(value))
+                        printf("Pushed\n");
+                    else
+                        printf("OverFlow\n");
+                    }
+                    break;
+
+                case 2:
+                    if(pop())
+                        printf("Pop\n");
+                    else
+                        printf("UnderFlow\n");
+                    break;
+
+                case 3:
+                    display();
+                    break;
+
+                case 4:
+                    running = 0;
+                    break;
+            }
+            count++;
+        }
+}
