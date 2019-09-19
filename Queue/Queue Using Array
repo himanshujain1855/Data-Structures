@@ -1,0 +1,121 @@
+/* QUEUE IMPLEMENTATION USING AN ARRAY
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 5
+
+// Global Variables
+static int REAR = -1;
+static int FRONT = -1;
+static int QUEUE[MAX];
+
+// Function Definitions
+int is_underflow()
+{
+  if(FRONT == -1)
+        return 1;
+  else
+       return 0;
+}
+int is_overflow()
+{
+    if(REAR >= MAX-1)  // else you can write like this REAR == MAX-1
+        return 1;
+    else
+        return 0;
+}
+int inqueue(int value)
+{
+    if(is_overflow())
+        return 0;
+    else
+        {
+            QUEUE[++REAR] = value;
+            if(REAR == 0)
+                FRONT++;
+            return 1;
+        }
+}
+
+int dequeue()
+{
+    if(is_underflow())
+        return 0;
+    else
+    {
+        if(FRONT == MAX -1){
+            FRONT = -1;
+            REAR = -1;
+            return 1;
+        }
+        else
+        {
+            FRONT++;
+            return 1;
+        }
+    }
+}
+
+void display()
+{
+ int i;
+ if(is_underflow())
+    printf("UnderFlow");
+ else
+    for(i = FRONT;i<=REAR;i++)
+        printf("%d\n",QUEUE[i]);
+}
+
+
+int main()
+{
+    int count = 0;
+        int running = 1;
+        int choice;
+        printf("\n------------------------------------------------Welcome To Stack Implementation Using An Array-------------------------------------------------------------\n");
+            printf("Please Select Which Operation Do You Want?\n");
+            printf("1. Insert\n");
+            printf("2. Delete\n");
+            printf("3. Display\n");
+            printf("4. Exit ");
+
+        while(running)
+        {
+            if(count != 0)
+                printf("Please Select Which Operation Do You Want?");
+            scanf("%d",&choice);
+
+            switch(choice)
+            {
+                case 1:
+                    {
+                        int value;
+                    printf("Enter Value");
+                    scanf("%d",&value);
+                    if(inqueue(value))
+                        printf("----------------Inserted--------------\n");
+                    else
+                        printf("OverFlow\n");
+                    }
+                    break;
+
+                case 2:
+                    if(dequeue())
+                        printf("--------------Deleted--------------\n");
+                    else
+                        printf("UnderFlow\n");
+                    break;
+
+                case 3:
+                    display();
+                    break;
+
+                case 4:
+                    running = 0;
+                    break;
+            }
+            count++;
+        }
+}
+
