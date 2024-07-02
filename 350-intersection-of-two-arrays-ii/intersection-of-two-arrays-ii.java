@@ -3,12 +3,7 @@ class Solution {
       HashMap<Integer, Integer> map = new HashMap();
 
         for (int j : nums1) {
-            int value=map.getOrDefault(j,-1);
-            if (value!=-1) {
-                map.put(j, value+1);
-            } else {
-                map.put(j, 1);
-            }
+            map.put(j, map.getOrDefault(j, 0) + 1);
         }
 
         List<Integer> ansList = new ArrayList();
