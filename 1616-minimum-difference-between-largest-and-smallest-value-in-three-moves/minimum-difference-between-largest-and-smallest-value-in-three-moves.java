@@ -2,7 +2,7 @@ class Solution {
     public int minDifference(int[] nums) {
         int n=nums.length;
 
-        if(n<=3) return 0;
+        if(n<=4) return 0;
         Arrays.sort(nums);
 
         int ans=nums[n-4]-nums[0];
