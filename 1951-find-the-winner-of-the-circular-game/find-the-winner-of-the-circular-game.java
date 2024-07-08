@@ -1,5 +1,5 @@
 class Solution {
-    public static int findTheWinner(int n, int k) {
+    public int findTheWinner(int n, int k) {
         if (n == 1 && k == 1)
             return 1;
         if(k==1) return n;
@@ -18,15 +18,13 @@ class Solution {
         int counter = 1;
         Node startNode = head;
         Node tempNode;
-        Node prevNode = head;
         while (true) {
             tempNode = startNode;
-            while (counter <= k) {
-                if (counter == k) {
-                    startNode = prevNode.next.next;
-                    prevNode.next = tempNode.next;
+            while (counter < k) {
+                if (counter == k - 1) {
+                    startNode = tempNode.next.next;
+                    tempNode.next = tempNode.next.next;
                 } else {
-                    prevNode = tempNode;
                     tempNode = tempNode.next;
                 }
                 counter++;
