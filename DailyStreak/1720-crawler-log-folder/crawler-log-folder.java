@@ -3,11 +3,8 @@ class Solution {
         int ans = 0;
 
         for (String log : logs) {
-            if (log.charAt(0)!='.') {
-                ans++;
-            } else if (ans > 0 & "../".equals(log)) {
-                ans--;
-            }
+            if (log.charAt(0)!='.') ans++; 
+            else if (ans > 0 & "../".equals(log))  ans--;
         }
 
         return ans;
