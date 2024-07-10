@@ -1,19 +1,17 @@
 class Solution {
     public int minOperations(String[] logs) {
-        int count = 0;
+        int ans = 0;
 
         for (String log : logs) {
-            char firstChar = log.charAt(0);
-            if ((firstChar >= 97 && firstChar <= 122) ||
-                    (firstChar >= 48 && firstChar <= 57)) {
-                count++;
+            if (log.charAt(0)!='.') {
+                ans++;
             } else if ("../".equals(log)) {
-                if (count != 0) {
-                    count--;
+                if (ans > 0) {
+                    ans--;
                 }
             }
         }
 
-        return count;
+        return ans;
     }
 }
