@@ -1,8 +1,6 @@
 class Solution {
     public String reverseParentheses(String s) {
         int len=s.length();
-        if(len==1) return s;
-        if(len==3) return s.charAt(1)+"";
         int bracketIndex=0;
         int indexOpeningBracket=0;
         while (true) {
