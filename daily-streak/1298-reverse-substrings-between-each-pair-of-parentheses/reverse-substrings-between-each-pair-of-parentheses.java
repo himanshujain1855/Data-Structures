@@ -1,34 +1,28 @@
 class Solution {
     public String reverseParentheses(String s) {
         int len=s.length();
-        int bracketIndex=0;
-        int indexOpeningBracket=0;
-        while (true) {
-            bracketIndex=0;
-            indexOpeningBracket=0;
-            while (true) {
-                if(bracketIndex>=len) return s;
-                char c=s.charAt(bracketIndex);
-                if('('==c){
-                    indexOpeningBracket=bracketIndex;
-                }else if(')'==c){
-                    String rev=reverse(s.substring(indexOpeningBracket+1,bracketIndex));
-                    s=s.substring(0,indexOpeningBracket)+rev+s.substring(bracketIndex+1,len);
-                    len=s.length();
-                    break;
-                }
-                bracketIndex++;
-            }
+        Stack<Integer> stack=new Stack<>();
+        String rev="";
+        for (int i = 0; i < len; i++) {
+            char c=s.charAt(i);
+          if('('==c){
+              stack.push(rev.length());
+          }else if(')'==c){
+              rev=reverse(rev,stack.pop(),rev.length());
+          }else{
+              rev+=c;
+          }
         }
+
+        return rev;
     }
 
-    public static String reverse(String s){
-        int len=s.length();
+    public static String reverse(String s,int begin,int end){
         char[] chars=s.toCharArray();
-        for (int i = 0; i < len/2; i++) {
+        for (int i = begin; i <((begin+end)/2); i++) {
             char temp=chars[i];
-            chars[i]=chars[len-i-1];
-            chars[len-i-1]=temp;
+            chars[i]=chars[begin+end-i-1];
+            chars[begin+end-i-1]=temp;
         }
         return new String(chars);
     }
