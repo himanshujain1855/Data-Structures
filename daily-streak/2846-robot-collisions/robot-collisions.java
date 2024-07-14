@@ -10,9 +10,10 @@ class Solution {
                 (n2, n1) -> Integer.compare(positions[n2], positions[n1])
         );
         List<Integer> ans = new ArrayList<>();
+        HashMap<Integer,Boolean> stackToHashMap=new HashMap<>();
         Stack<Integer> positionsStack = new Stack<>();
         positionsStack.push(actualIndices[0]);
-
+        stackToHashMap.put(actualIndices[0],true);
 
         for (int i = 1; i < len; i++) {
             char dir = directions.charAt(actualIndices[i]);
@@ -21,6 +22,7 @@ class Solution {
                     char lastPushedDirection = directions.charAt(positionsStack.peek());
 
                     if (directions.charAt(actualIndices[i]) == lastPushedDirection) {
+                        stackToHashMap.put(actualIndices[i],true);
                         positionsStack.push(actualIndices[i]);
                         break;
                     }
@@ -30,27 +32,26 @@ class Solution {
                     int positionsIHealth = healths[actualIndices[i]];
 
                     if (healthPeekWhile == positionsIHealth) {
-                        positionsStack.pop();
+                        stackToHashMap.remove(positionsStack.pop());
                         break;
                     } else if (healthPeekWhile > positionsIHealth) {
                         healths[peekWhile]--;
                         break;
                     } else {
-                        positionsStack.pop();
+                        stackToHashMap.remove(positionsStack.pop());
                         healths[actualIndices[i]]--;
                         if (positionsStack.isEmpty()) {
                             positionsStack.push(actualIndices[i]);
+                            stackToHashMap.put(actualIndices[i],true);
                             break;
                         }
                     }
                 }
             } else {
                 positionsStack.push(actualIndices[i]);
+                stackToHashMap.put(actualIndices[i],true);
             }
         }
-
-       HashMap<Integer,Boolean> stackToHashMap=new HashMap<>();
-        positionsStack.forEach(integer -> stackToHashMap.put(integer,true));
 
         for (int i = 0; i < len; i++) {
             if (stackToHashMap.containsKey(i)) {
@@ -58,7 +59,6 @@ class Solution {
             }
         }
         return ans;
-        
     }
 
     // Function for linear search
