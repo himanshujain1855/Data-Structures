@@ -5,12 +5,13 @@ class Solution {
         int len = formula.length();
         if (len == 1) return formula;
         stack.push(new HashMap<>());
-
-        for (int i = 0; i < len; i++) {
+        int i = 0;
+        while (i < len) {
             char charAt = formula.charAt(i);
 
             if ('(' == charAt) {
                 stack.push(new HashMap<>());
+                i++;
             } else if (')' == charAt) {
                 StringBuilder multiplierString = new StringBuilder();
                 int multiplier = 1;
@@ -24,14 +25,11 @@ class Solution {
 
                 HashMap<String, Integer> peek = stack.pop();
 
-            
                 for (String key : peek.keySet()) {
                     stack.peek().put(key, stack.peek().getOrDefault(key, 0) + peek.get(key) * multiplier);
                 }
-
-                i--;
             } else {
-                StringBuilder atom = new StringBuilder(formula.charAt(i)+"");
+                StringBuilder atom = new StringBuilder(formula.charAt(i) + "");
                 i++;
                 while (i < len && Character.isLowerCase(formula.charAt(i))) {
                     atom.append(formula.charAt(i));
@@ -47,15 +45,14 @@ class Solution {
 
                 if (!multiplierString.isEmpty()) multiplier = Integer.parseInt(multiplierString.toString());
 
-                stack.peek().put(atom.toString(), stack.peek().getOrDefault(atom.toString(),0) + multiplier);
-                i--;
+                stack.peek().put(atom.toString(), stack.peek().getOrDefault(atom.toString(), 0) + multiplier);
             }
         }
 
         TreeMap<String, Integer> sortedMap = new TreeMap<>(stack.peek());
 
         StringBuilder ans = new StringBuilder();
-        for (Map.Entry<String, Integer> map: sortedMap.entrySet()) {
+        for (Map.Entry<String, Integer> map : sortedMap.entrySet()) {
             ans.append(map.getKey());
             if (map.getValue() != 1) {
                 ans.append(map.getValue());
