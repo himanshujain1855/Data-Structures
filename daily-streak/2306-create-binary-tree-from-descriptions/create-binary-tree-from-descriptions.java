@@ -46,10 +46,11 @@ class Solution {
             }
             childs.add(child);
         }
-        AtomicReference<TreeNode> parentNode = new AtomicReference<>();
-        nodeAddressMap.keySet().forEach(key -> {
-            if(!childs.contains(key)) parentNode.set(nodeAddressMap.get(key));
-        });
-        return parentNode.get();
+
+        for (int[] arr : descriptions) {
+            if (!childs.contains(arr[0])) return nodeAddressMap.get(arr[0]);
+        }
+
+        return null;
     }
 }
