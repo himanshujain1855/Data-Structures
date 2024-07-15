@@ -3,8 +3,7 @@ class Solution {
         Stack<HashMap<String, Integer>> stack = new Stack<>();
 
         int len = formula.length();
-        if (len == 1)
-            return formula;
+        if (len == 1) return formula;
         stack.push(new HashMap<>());
 
         for (int i = 0; i < len; i++) {
@@ -13,17 +12,15 @@ class Solution {
             if ('(' == charAt) {
                 stack.push(new HashMap<>());
             } else if (')' == charAt) {
-                String multiplierString = "";
+                StringBuilder multiplierString = new StringBuilder();
                 int multiplier = 1;
                 i++;
                 while (i < len && Character.isDigit(formula.charAt(i))) {
-                    multiplierString += formula.charAt(i);
+                    multiplierString.append(formula.charAt(i));
                     i++;
                 }
 
-                if (multiplierString != "") {
-                    multiplier = Integer.parseInt(multiplierString);
-                }
+                if (!multiplierString.isEmpty()) multiplier = Integer.parseInt(multiplierString.toString());
 
                 HashMap<String, Integer> peek = stack.pop();
 
@@ -36,42 +33,36 @@ class Solution {
 
                 i--;
             } else {
-                String atom = formula.charAt(i) + "";
+                StringBuilder atom = new StringBuilder(formula.charAt(i)+"");
                 i++;
                 while (i < len && Character.isLowerCase(formula.charAt(i))) {
-                    atom += formula.charAt(i);
+                    atom.append(formula.charAt(i));
                     i++;
                 }
-                String multiplierString = "";
+                StringBuilder multiplierString = new StringBuilder();
                 int multiplier = 1;
 
                 while (i < len && Character.isDigit(formula.charAt(i))) {
-                    multiplierString += formula.charAt(i);
+                    multiplierString.append(formula.charAt(i));
                     i++;
                 }
 
-                if (multiplierString != "")
-                    multiplier = Integer.parseInt(multiplierString);
+                if (!multiplierString.isEmpty()) multiplier = Integer.parseInt(multiplierString.toString());
 
-                if (stack.peek().containsKey(atom)) {
-                    stack.peek().put(atom, stack.peek().get(atom) + multiplier);
-                } else {
-                    stack.peek().put(atom, multiplier);
-                }
+                stack.peek().put(atom.toString(), stack.peek().getOrDefault(atom.toString(),0) + multiplier);
                 i--;
             }
         }
 
         TreeMap<String, Integer> sortedMap = new TreeMap<>(stack.peek());
 
-        String ans = "";
-        for (String sortedKey : sortedMap.keySet()) {
-            if (sortedMap.get(sortedKey) == 1) {
-                ans += sortedKey;
-            } else {
-                ans += sortedKey + sortedMap.get(sortedKey);
+        StringBuilder ans = new StringBuilder();
+        for (Map.Entry<String, Integer> map: sortedMap.entrySet()) {
+            ans.append(map.getKey());
+            if (map.getValue() != 1) {
+                ans.append(map.getValue());
             }
         }
-        return ans;
+        return ans.toString();
     }
 }
