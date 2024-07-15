@@ -25,8 +25,8 @@ class Solution {
 
                 HashMap<String, Integer> peek = stack.pop();
 
-                for (String key : peek.keySet()) {
-                    stack.peek().put(key, stack.peek().getOrDefault(key, 0) + peek.get(key) * multiplier);
+                for (Map.Entry<String, Integer> map : peek.entrySet()) {
+                    stack.peek().put(map.getKey(), stack.peek().getOrDefault(map.getKey(), 0) + map.getValue() * multiplier);
                 }
             } else {
                 StringBuilder atom = new StringBuilder(formula.charAt(i) + "");
