@@ -24,11 +24,9 @@ class Solution {
 
                 HashMap<String, Integer> peek = stack.pop();
 
+            
                 for (String key : peek.keySet()) {
-                    peek.put(key, peek.get(key) * multiplier);
-                }
-                for (String key : peek.keySet()) {
-                    stack.peek().put(key, stack.peek().getOrDefault(key, 0) + peek.get(key));
+                    stack.peek().put(key, stack.peek().getOrDefault(key, 0) + peek.get(key) * multiplier);
                 }
 
                 i--;
