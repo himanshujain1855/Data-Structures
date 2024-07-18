@@ -19,16 +19,12 @@ class Solution {
             }
 
             StringBuilder localName = new StringBuilder();
-            if (splitedByPlus[0].contains(".")) {
-                String emailWithDot = splitedByPlus[0];
-                int emailWithDotLen = emailWithDot.length();
-                for (int j = 0; j < emailWithDotLen; j++) {
-                    if (emailWithDot.charAt(j) == '.')
-                        continue;
-                    localName.append(emailWithDot.charAt(j));
-                }
-            } else {
-                localName = new StringBuilder(splitedByPlus[0]);
+            String emailWithDot = splitedByPlus[0];
+            int emailWithDotLen = emailWithDot.length();
+            for (int j = 0; j < emailWithDotLen; j++) {
+                if (emailWithDot.charAt(j) == '.')
+                    continue;
+                localName.append(emailWithDot.charAt(j));
             }
 
             String email = localName + "@" + splitedByAmpherSend[1];
