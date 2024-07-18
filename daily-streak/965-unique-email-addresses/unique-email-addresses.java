@@ -7,24 +7,16 @@ class Solution {
             if (!emails[i].contains("@"))
                 continue;
             String[] splitedByAmpherSend = emails[i].split("@");
-            String[] splitedByPlus;
-            String[] splitedByDot;
-
-            if (splitedByAmpherSend[0].contains("+")) {
-                splitedByPlus = new String[] {
-                        splitedByAmpherSend[0].substring(0, splitedByAmpherSend[0].indexOf("+"))
-                };
-            } else {
-                splitedByPlus = new String[] { splitedByAmpherSend[0] };
-            }
 
             StringBuilder localName = new StringBuilder();
-            String emailWithDot = splitedByPlus[0];
-            int emailWithDotLen = emailWithDot.length();
+            String emailWithDotAndPlus = splitedByAmpherSend[0];
+            int emailWithDotLen = emailWithDotAndPlus.length();
             for (int j = 0; j < emailWithDotLen; j++) {
-                if (emailWithDot.charAt(j) == '.')
+                if (emailWithDotAndPlus.charAt(j) == '.')
                     continue;
-                localName.append(emailWithDot.charAt(j));
+                if (emailWithDotAndPlus.charAt(j) == '+')
+                    break;
+                localName.append(emailWithDotAndPlus.charAt(j));
             }
 
             String email = localName + "@" + splitedByAmpherSend[1];
