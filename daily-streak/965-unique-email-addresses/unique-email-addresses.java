@@ -2,25 +2,31 @@ class Solution {
     public static int numUniqueEmails(String[] emails) {
         int len = emails.length;
         HashMap<String, Integer> uniqueMails = new HashMap();
-
+        boolean add = true;
+        boolean ampherSendEncountered = false;
         for (int i = 0; i < len; i++) {
-            if (!emails[i].contains("@"))
-                continue;
-            String[] splitedByAmpherSend = emails[i].split("@");
+            add = true;
+            ampherSendEncountered = false;
+            int emailLen = emails[i].length();
+            String email = emails[i];
+            StringBuilder emailBuilder = new StringBuilder();
 
-            StringBuilder localName = new StringBuilder();
-            String emailWithDotAndPlus = splitedByAmpherSend[0];
-            int emailWithDotLen = emailWithDotAndPlus.length();
-            for (int j = 0; j < emailWithDotLen; j++) {
-                if (emailWithDotAndPlus.charAt(j) == '.')
-                    continue;
-                if (emailWithDotAndPlus.charAt(j) == '+')
-                    break;
-                localName.append(emailWithDotAndPlus.charAt(j));
+            for (int k = 0; k < emailLen; k++) {
+                char charAt=email.charAt(k);
+
+                if (charAt == '@') {
+                    ampherSendEncountered = true;
+                }
+                if (charAt == '+') {
+                    add = false;
+                }
+                if (ampherSendEncountered || (add && !(charAt == '.'))) {
+                    emailBuilder.append(charAt);
+                }
             }
-
-            String email = localName + "@" + splitedByAmpherSend[1];
-            uniqueMails.put(email, 1);
+            if(ampherSendEncountered){
+                uniqueMails.put(emailBuilder.toString(), 1);
+            }
         }
 
         return uniqueMails.size();
