@@ -1,40 +1,42 @@
 class Solution {
-    public boolean isIsomorphic(String s, String t) {
-        int lenS=s.length();
-        int lenT=t.length();
-        if(lenS!=lenT) return false;
+    public static boolean isIsomorphic(String s, String t) {
+        int lenS = s.length();
+        int lenT = t.length();
+        if (lenS != lenT) return false;
+
+        int[] sMapping = new int[127];
+
+        for (int i = 0; i <= 126; i++) {
+            sMapping[i] = -1;
+        }
+
+        int[] tMapping = new int[127];
+
+        for (int i = 0; i <= 126; i++) {
+            tMapping[i] = -1;
+        }
         
-        int[] arr=new int[127];
-
-        for(int i=0;i<=126;i++){
-            arr[i]=-1;
-        }
-
-        int[] tArr=new int[127];
-
-        for(int i=0;i<=126;i++){
-            tArr[i]=-1;
-        }
-
-        boolean twice=false;
-        for(int i=0;i<lenS;i++){
-            twice=false;
-            char charAtS=s.charAt(i);
-            char charAtT=t.charAt(i);
-            if(arr[charAtS]!=-1){
-               twice=true;
-               if(arr[charAtS]!=charAtT) return false; 
-            }else{
-                arr[charAtS]=charAtT;
+        boolean twice;
+        char charAtS;
+        char charAtT;
+        for (int i = 0; i < lenS; i++) {
+            twice = false;
+            charAtS = s.charAt(i);
+            charAtT = t.charAt(i);
+            if (sMapping[charAtS] != -1) {
+                twice = true;
+                if (sMapping[charAtS] != charAtT) return false;
+            } else {
+                sMapping[charAtS] = charAtT;
             }
 
-            if(tArr[charAtT]!=-1 && !twice){
+            if (tMapping[charAtT] != -1 && !twice) {
                 return false;
-            }else{
-                tArr[charAtT]=charAtS;
+            } else {
+                tMapping[charAtT] = charAtS;
             }
         }
 
-        return true; 
+        return true;
     }
 }
