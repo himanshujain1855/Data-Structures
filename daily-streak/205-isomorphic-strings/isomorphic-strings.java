@@ -16,7 +16,6 @@ class Solution {
             tArr[i]=-1;
         }
 
-        HashMap<Character,Character> tMap=new HashMap();
         boolean twice=false;
         for(int i=0;i<lenS;i++){
             twice=false;
