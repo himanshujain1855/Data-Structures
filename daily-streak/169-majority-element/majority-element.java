@@ -17,10 +17,8 @@ class Solution {
                 tempCount = 0;
             }
             tempCount++;
-            if(i==len-1){
-                if (tempCount > majorityElementMaxCount) {
-                    majorityElement =nums[i];
-                }
+            if (i == len - 1 && tempCount > majorityElementMaxCount) {
+                majorityElement = nums[i];
             }
         }
 
