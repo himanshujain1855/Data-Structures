@@ -4,25 +4,35 @@ class Solution {
         int lenT=t.length();
         if(lenS!=lenT) return false;
         
+        int[] arr=new int[127];
 
-        HashMap<Character,Character> map=new HashMap();
+        for(int i=0;i<=126;i++){
+            arr[i]=-1;
+        }
+
+        int[] tArr=new int[127];
+
+        for(int i=0;i<=126;i++){
+            tArr[i]=-1;
+        }
+
         HashMap<Character,Character> tMap=new HashMap();
         boolean twice=false;
         for(int i=0;i<lenS;i++){
             twice=false;
             char charAtS=s.charAt(i);
             char charAtT=t.charAt(i);
-            if(map.containsKey(charAtS)){
-                twice=true;
-               if(map.get(charAtS)!=charAtT) return false; 
+            if(arr[charAtS]!=-1){
+               twice=true;
+               if(arr[charAtS]!=charAtT) return false; 
             }else{
-                map.put(charAtS,charAtT);
+                arr[charAtS]=charAtT;
             }
 
-            if(tMap.containsKey(charAtT) && !twice){
+            if(tArr[charAtT]!=-1 && !twice){
                 return false;
             }else{
-                tMap.put(charAtT,charAtS);
+                tArr[charAtT]=charAtS;
             }
         }
 
