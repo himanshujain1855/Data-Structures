@@ -8,7 +8,7 @@ class Solution {
             if (count == 0) {
                 majElement = nums[i];
                 count++;
-            } else if (nums[i] != majElement && count != 0) {
+            } else if (nums[i] != majElement) {
                 count--;
             } else {
                 count++;
