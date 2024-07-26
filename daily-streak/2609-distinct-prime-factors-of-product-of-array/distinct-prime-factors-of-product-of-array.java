@@ -1,19 +1,17 @@
 class Solution {
-    public int distinctPrimeFactors(int[] nums) {
+    public static int distinctPrimeFactors(int[] nums) {
         Set<Integer> primeFac = new HashSet();
-
-        int len = nums.length;
-
-        for (int i = 0; i < len; i++) {
-
-            int n = nums[i];
-
+        Set<Integer> numsSet = new HashSet();
+        for (int num:nums){
+            numsSet.add(num);
+        }
+        numsSet.forEach(integer -> {
             boolean nBy2 = false;
             boolean nBy3 = false;
             boolean nBy5 = false;
 
-            while (n % 2 == 0) {
-                n = n / 2;
+            while (integer % 2 == 0) {
+                integer = integer / 2;
                 nBy2 = true;
             }
 
@@ -21,8 +19,8 @@ class Solution {
                 primeFac.add(2);
             }
 
-            while (n % 3 == 0) {
-                n = n / 3;
+            while (integer % 3 == 0) {
+                integer = integer / 3;
                 nBy3 = true;
             }
 
@@ -30,8 +28,8 @@ class Solution {
                 primeFac.add(3);
             }
 
-            while (n % 5 == 0) {
-                n = n / 5;
+            while (integer % 5 == 0) {
+                integer = integer / 5;
                 nBy5 = true;
             }
 
@@ -43,9 +41,9 @@ class Solution {
 
             boolean nByjPlus4 = false;
 
-            for (int j = 7; j * j <= n; j += 6) {
-                while (n % j == 0) {
-                    n /= j;
+            for (int j = 7; j * j <= integer; j += 6) {
+                while (integer % j == 0) {
+                    integer /= j;
                     nByj = true;
 
                 }
@@ -54,8 +52,8 @@ class Solution {
                     primeFac.add(j);
                 }
 
-                while (n % (j + 4) == 0) {
-                    n /= (j + 4);
+                while (integer % (j + 4) == 0) {
+                    integer /= (j + 4);
                     nByjPlus4 = true;
 
                 }
@@ -65,10 +63,10 @@ class Solution {
                 }
             }
 
-            if (n > 1)
-                primeFac.add(n);
+            if (integer > 1)
+                primeFac.add(integer);
 
-        }
+        });
 
         return primeFac.size();
     }
