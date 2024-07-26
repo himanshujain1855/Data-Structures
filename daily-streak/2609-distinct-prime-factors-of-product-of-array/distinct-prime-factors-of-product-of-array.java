@@ -8,28 +8,28 @@ class Solution {
 
             int n = nums[i];
 
-            while (n > 0 && n % 2 == 0) {
+            while (n % 2 == 0) {
                 n = n / 2;
                 primeFac.add(2);
             }
 
-            while (n > 0 && n % 3 == 0) {
+            while (n % 3 == 0) {
                 n = n / 3;
                 primeFac.add(3);
             }
 
-            while (n > 0 && n % 5 == 0) {
+            while (n % 5 == 0) {
                 n = n / 5;
                 primeFac.add(5);
             }
 
             for (int j = 7; j * j <= n; j += 6) {
-                while (n > 0 && n % j == 0) {
+                while (n % j == 0) {
                     n /= j;
                     primeFac.add(j);
                 }
 
-                while (n > 0 && n % (j + 4) == 0) {
+                while (n % (j + 4) == 0) {
                     n /= (j + 4);
                     primeFac.add(j + 4);
                 }
