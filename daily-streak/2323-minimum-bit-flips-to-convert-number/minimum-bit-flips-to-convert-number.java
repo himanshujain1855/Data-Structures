@@ -13,8 +13,8 @@ class Solution {
                 if((start & 1)==1) count++;
             }
             
-            start/=2;
-            goal/=2;
+            start>>=1;
+            goal>>=1;
         }
     }
 }
