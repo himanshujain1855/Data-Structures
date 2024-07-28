@@ -1,20 +1,17 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        int ans=0;
+        int len=nums.length;
+        
+        if(len==1) return nums[0];
 
-        for(int i=0;i<32;i++){
-            int ones=0;
-            int mask= (1 << i);
-            for(int num:nums){
-                if((num & mask)!=0){
-                    ones++;
-                }
-            }
-            if((ones % 3) > 0){
-                ans = (ans | (1 << i)); 
+        Arrays.sort(nums);
+
+        for(int i=1;i<len;i+=3){
+            if(!(nums[i]==nums[i-1] && nums[i]==nums[i+1])){
+                return nums[i-1];
             }
         }
 
-        return ans;
+        return nums[len-1];
     }
 }
