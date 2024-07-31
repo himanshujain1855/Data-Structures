@@ -7,7 +7,8 @@ class Solution {
 
         Arrays.sort(nums);
         while(start < end){
-            maxMin=Math.max(nums[start]+nums[end],maxMin);
+            int min=nums[start]+nums[end];
+            if(min > maxMin) maxMin=min;
             start++;
             end--;
         }
