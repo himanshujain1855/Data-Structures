@@ -16,7 +16,7 @@ class Solution {
         char[] ans = new char[ansSize];
 
         char carry = '0';
-        ansSize--;
+
         while (true) {
             if (iA < 0 && iB < 0)
                 break;
@@ -35,14 +35,8 @@ class Solution {
             char[] temp = eval(cA + "" + cB + carry);
             carry = temp[1];
 
-            if (iA < 0) {
-                ans[iB] = temp[0];
-            } else if (iB < 0) {
-                ans[iA] = temp[0];
-            } else {
-                ans[ansSize] = temp[0];
-            }
-            ansSize--;
+            ans[Math.max(iA, iB)] = temp[0];
+
             iA--;
             iB--;
         }
