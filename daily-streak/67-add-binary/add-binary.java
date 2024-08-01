@@ -23,9 +23,9 @@ class Solution {
                 sum = 0;
             }
 
-            ansSb.insert(0, sum);
+            ansSb.append(sum);
         }
-
+        ansSb = ansSb.reverse();
         if (carry == 1) return "1" + ansSb;
         return ansSb.toString();
     }
