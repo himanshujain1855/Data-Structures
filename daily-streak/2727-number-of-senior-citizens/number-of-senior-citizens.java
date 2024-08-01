@@ -5,7 +5,9 @@ class Solution {
         int ans=0;
 
         for(int i=0;i<len;i++){
-            if(Integer.parseInt(details[i].substring(11,13))>60) ans++;
+            char eles = details[i].charAt(11);
+            char twels = details[i].charAt(12);
+            if(Integer.parseInt(eles+""+twels)>60) ans++;
         }
 
         return ans;
