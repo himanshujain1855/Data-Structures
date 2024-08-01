@@ -1,18 +1,12 @@
 class Solution {
     public static String addBinary(String a, String b) {
-        int lenA = a.length();
-        int lenB = b.length();
+        int iA = a.length() - 1;
+        int iB = b.length() - 1;
 
-        int iA = lenA - 1;
-
-        int iB = lenB - 1;
-
-        int ansSize = Math.max(lenA, lenB);
-
-        char[] ans = new char[ansSize];
+        StringBuilder ansSb=new StringBuilder();
 
         char carry = '0';
-
+        
         while (iA >= 0 || iB >= 0) {
 
             char cA = (iA >= 0) ? a.charAt(iA) : '0';
@@ -20,16 +14,14 @@ class Solution {
 
             char[] temp = eval(cA + "" + cB + carry);
             carry = temp[1];
-
-            ans[Math.max(iA,iB)] = temp[0];
+            ansSb.insert(0,temp[0]);
 
             iA--;
             iB--;
         }
 
-        if (carry == '1')
-            return "1" + new String(ans);
-        return new String(ans);
+        if (carry == '1') return "1" + ansSb;
+        return ansSb.toString();
     }
 
     static char[] eval(String s) {
