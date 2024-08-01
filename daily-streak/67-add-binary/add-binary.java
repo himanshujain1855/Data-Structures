@@ -7,35 +7,21 @@ class Solution {
 
         int iB = lenB - 1;
 
-        char[] charsA = a.toCharArray();
-
-        char[] charsB = b.toCharArray();
-
         int ansSize = Math.max(lenA, lenB);
 
         char[] ans = new char[ansSize];
 
         char carry = '0';
 
-        while (true) {
-            if (iA < 0 && iB < 0)
-                break;
+        while (iA >= 0 || iB >= 0) {
 
-            char cA = '0';
-            char cB = '0';
-
-            if (iA >= 0) {
-                cA = charsA[iA];
-            }
-
-            if (iB >= 0) {
-                cB = charsB[iB];
-            }
+            char cA = (iA >= 0) ? a.charAt(iA) : '0';
+            char cB = (iB >= 0) ? b.charAt(iB) : '0';
 
             char[] temp = eval(cA + "" + cB + carry);
             carry = temp[1];
 
-            ans[Math.max(iA, iB)] = temp[0];
+            ans[Math.max(iA,iB)] = temp[0];
 
             iA--;
             iB--;
