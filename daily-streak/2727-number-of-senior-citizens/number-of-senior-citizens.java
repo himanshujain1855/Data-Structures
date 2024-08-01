@@ -3,11 +3,12 @@ class Solution {
         int len=details.length;
 
         int ans=0;
-
-        for(int i=0;i<len;i++){
-            char eles = details[i].charAt(11);
-            char twels = details[i].charAt(12);
-            if(Integer.parseInt(eles+""+twels)>60) ans++;
+        
+        for(String passDetail:details){
+            char tens = passDetail.charAt(11);
+            char ones = passDetail.charAt(12);
+            if(Integer.parseInt(tens+""+ones)>60) ans++;
+            
         }
 
         return ans;
