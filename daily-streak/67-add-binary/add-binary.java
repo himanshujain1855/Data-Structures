@@ -7,7 +7,7 @@ class Solution {
 
         int carry = 0;
 
-        while (iA >= 0 || iB >= 0) {
+        while (iA >= 0 || iB >= 0 || carry==1) {
             int sum = carry;
 
             char cA = (iA >= 0) ? a.charAt(iA--) : '0';
@@ -25,9 +25,7 @@ class Solution {
 
             ansSb.append(sum);
         }
-        ansSb = ansSb.reverse();
-        if (carry == 1) return "1" + ansSb;
-        return ansSb.toString();
+       return ansSb.reverse().toString();
     }
 
 }
