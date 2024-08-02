@@ -10,19 +10,8 @@
  */
 class Solution {
     public static boolean isPalindrome(ListNode head) {
-        ListNode newNode=new ListNode();
-        ListNode copyHead=newNode;
-        ListNode temp=head;
-
-        while (temp!=null){
-            newNode.val=temp.val;
-            newNode.next=new ListNode();
-            newNode=newNode.next;
-            temp=temp.next;
-        }
-
+        ListNode copyHead=copyList(head);
         ListNode rev=reverse(head);
-
         while(copyHead!=null && rev!=null){
             if(copyHead.val != rev.val) return false;
 
@@ -33,8 +22,7 @@ class Solution {
         return true;
     }
 
-    public static ListNode reverse(ListNode head){
-        ListNode curr=head;
+    public static ListNode reverse(ListNode curr){
         ListNode prev=null;
         ListNode next;
 
@@ -46,5 +34,18 @@ class Solution {
         }
 
         return prev;
+    }
+
+    public static ListNode copyList(ListNode head){
+        ListNode newNode=new ListNode();
+        ListNode copyHead=newNode;
+
+        while (head!=null){
+            newNode.val=head.val;
+            newNode.next=new ListNode();
+            newNode=newNode.next;
+            head=head.next;
+        }
+        return copyHead;
     }
 }
