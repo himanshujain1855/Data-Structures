@@ -7,13 +7,15 @@ class Solution {
         
         while(leftHeightIndex < rightHeightIndex){
             
-            int width=rightHeightIndex-leftHeightIndex;
             int leftHeight=height[leftHeightIndex];
             int rightHeight=height[rightHeightIndex];
             
+            int width=rightHeightIndex-leftHeightIndex;
             int heightInt=leftHeight < rightHeight ? leftHeight :rightHeight;
             
-            maxWater=Math.max(maxWater,width * heightInt);
+            int area=width * heightInt;
+
+            maxWater= maxWater < area ? area :  maxWater;
 
             if(leftHeight < rightHeight){
                 leftHeightIndex++;
