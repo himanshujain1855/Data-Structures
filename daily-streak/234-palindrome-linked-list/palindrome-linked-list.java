@@ -12,6 +12,7 @@ class Solution {
     public static boolean isPalindrome(ListNode head) {
         ListNode copyHead=copyList(head);
         ListNode rev=reverse(head);
+        
         while(copyHead!=null && rev!=null){
             if(copyHead.val != rev.val) return false;
 
