@@ -9,18 +9,17 @@
  * }
  */
 class Solution {
+    static ListNode curr;
     public static boolean isPalindrome(ListNode head) {
-        ListNode copyHead=copyList(head);
-        ListNode rev=reverse(head);
-        
-        while(copyHead!=null && rev!=null){
-            if(copyHead.val != rev.val) return false;
-
-            copyHead=copyHead.next;
-            rev=rev.next;
-        }
-
-        return true;
+        curr=head;
+        return isPalindromeRecursive(head);
+    }
+    
+    public static boolean isPalindromeRecursive(ListNode head) {
+        if(head==null) return true;
+        boolean ans=isPalindromeRecursive(head.next) && head.val== curr.val;
+        curr = curr.next;
+        return ans;
     }
 
     public static ListNode reverse(ListNode curr){
