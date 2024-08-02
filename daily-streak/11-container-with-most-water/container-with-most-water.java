@@ -11,14 +11,13 @@ class Solution {
             int rightHeight=height[rightHeightIndex];
             
             int width=rightHeightIndex-leftHeightIndex;
-            boolean isLeftHeightSmaller=leftHeight < rightHeight;
-            int heightInt=isLeftHeightSmaller ? leftHeight :rightHeight;
+            int heightInt=leftHeight < rightHeight ? leftHeight :rightHeight;
             
             int area=width * heightInt;
 
             maxWater= maxWater < area ? area :  maxWater;
 
-            if(isLeftHeightSmaller){
+            if(leftHeight < rightHeight){
                 leftHeightIndex++;
             }else{
                 rightHeightIndex--;
