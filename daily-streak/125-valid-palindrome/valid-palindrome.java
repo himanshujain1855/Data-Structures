@@ -10,12 +10,10 @@ class Solution {
 
         for(int i=0;i<len;i++){
             char c=s.charAt(i);
-            if(Character.isDigit(c)){
-                newS.append(c);
-            }else if(Character.isAlphabetic(c)){
+            if(Character.isDigit(c) || Character.isAlphabetic(c)){
                 newS.append(Character.toLowerCase(c));
             }
-        } 
+        }
 
         return newS.toString();
     }
