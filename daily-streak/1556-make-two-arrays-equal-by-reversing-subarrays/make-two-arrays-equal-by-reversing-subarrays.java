@@ -1,11 +1,16 @@
 class Solution {
     public boolean canBeEqual(int[] target, int[] arr) {
-        Arrays.sort(target);
-        Arrays.sort(arr);
+        HashMap<Integer,Integer> targetMap=new HashMap();
         int len=arr.length;
 
         for(int i=0;i<len;i++){
-            if(arr[i]!=target[i]) return false;
+            targetMap.put(target[i],targetMap.getOrDefault(target[i],0)+1);
+        }
+
+        for(int i=0;i<len;i++){
+            if(!targetMap.containsKey(arr[i])) return false;
+            if(targetMap.get(arr[i])==0) return false;
+            targetMap.put(arr[i],targetMap.get(arr[i])-1);
         }
 
         return true;
