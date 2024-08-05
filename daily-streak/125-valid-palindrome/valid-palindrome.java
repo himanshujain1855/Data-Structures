@@ -1,29 +1,34 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        s=convertToAlphanumeric(s);
+        // s=convertToAlphanumeric(s);
         return isPalinDrome(s);
     }
 
-    public static String convertToAlphanumeric(String s){
-       int len=s.length();
-        StringBuilder newS=new StringBuilder();
+    public static boolean isPalinDrome(String word) {
+        int start = 0;
+        int end = word.length() - 1;
 
-        for(int i=0;i<len;i++){
-            char c=s.charAt(i);
-            if(Character.isDigit(c) || Character.isAlphabetic(c)){
-                newS.append(Character.toLowerCase(c));
+        while (start < end) {
+            char startChar = Character.toLowerCase(word.charAt(start));
+            char endChar = Character.toLowerCase(word.charAt(end));
+            boolean startContinue=false;
+
+            if (!(Character.isDigit(startChar) || Character.isAlphabetic(startChar))) {
+                start++;
+                startContinue=true;
             }
-        }
 
-        return newS.toString();
-    }
+            if (!(Character.isDigit(endChar) || Character.isAlphabetic(endChar))) {
+                end--;
+                continue;
+            }
 
-    public boolean isPalinDrome(String word){
-        int start=0;
-        int end=word.length()-1;
+            if(startContinue) continue;
 
-        while(start <end){
-            if(word.charAt(start)!=word.charAt(end)) return false;
+            if (startChar != endChar) {
+                return false;
+            }
+
             start++;
             end--;
         }
