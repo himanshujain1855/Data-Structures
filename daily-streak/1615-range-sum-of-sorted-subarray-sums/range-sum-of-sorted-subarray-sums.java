@@ -1,6 +1,8 @@
 class Solution {
     public int rangeSum(int[] nums, int n, int left, int right) {
-        List<Integer> subArrList = new ArrayList();
+        int mod = 1000000007;
+        int cap = (int) (n * (((double) n + 1) / 2));
+        ArrayList<Integer> subArrList = new ArrayList<>(cap);
 
         for (int i = 0; i < n; i++) {
             int sum = 0;
@@ -9,14 +11,13 @@ class Solution {
                 subArrList.add(sum);
             }
         }
-        int size=subArrList.size();
-        if(!(size==right && left==1)) Collections.sort(subArrList);
-        int ans = 0;
-        int mod = 1000000007;
+        if (!(cap == right && left == 1))
+            Collections.sort(subArrList);
+        long ans = 0;
+
         for (int i = left; i <= right; i++) {
             ans += (subArrList.get(i - 1) % mod);
-            ans = ans % mod;
         }
-        return (int)(ans % mod);
+        return (int) (ans % mod);
     }
 }
