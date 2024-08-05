@@ -16,9 +16,10 @@ class Solution {
             Arrays.sort(arr);
         }
         long ans = 0;
+        left--;
 
-        for (int i = left; i <= right; i++) {
-            ans += (arr[i - 1] % mod);
+        for (int i = left; i < right; i++) {
+            ans += (arr[i] % mod);
         }
         return (int) (ans % mod);
     }
