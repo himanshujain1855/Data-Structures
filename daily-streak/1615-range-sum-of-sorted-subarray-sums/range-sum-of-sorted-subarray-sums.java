@@ -6,8 +6,8 @@ class Solution {
         for (int i = 0; i < n; i++) {
             int sum = 0;
             for (int j = i; j < n; j++) {
-                sum += (nums[j] % mod);
-                subArrList.add(sum % mod);
+                sum += nums[j];
+                subArrList.add(sum);
             }
         }
         int size=subArrList.size();
