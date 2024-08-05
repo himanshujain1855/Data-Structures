@@ -9,24 +9,12 @@ class Solution {
         int end = word.length() - 1;
 
         while (start < end) {
-            char startChar =word.charAt(start);
-            char endChar = word.charAt(end);
-            boolean startContinue=false;
-
-            if (!(Character.isDigit(startChar) || Character.isAlphabetic(startChar))) {
+            while (!Character.isLetterOrDigit(word.charAt(start)) && start < end)
                 start++;
-                startContinue=true;
-            }
-
-            if (!(Character.isDigit(endChar) || Character.isAlphabetic(endChar))) {
+            while (!Character.isLetterOrDigit(word.charAt(end)) && start < end)
                 end--;
-                continue;
-            }
 
-            if(startContinue) continue;
-            startChar = Character.toLowerCase(word.charAt(start));
-            endChar = Character.toLowerCase(word.charAt(end));
-            if (startChar != endChar) {
+            if (Character.toLowerCase(word.charAt(start)) != Character.toLowerCase(word.charAt(end))) {
                 return false;
             }
 
