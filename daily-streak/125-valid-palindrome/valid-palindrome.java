@@ -19,10 +19,13 @@ class Solution {
     }
 
     public boolean isPalinDrome(String word){
-        int len=word.length();
+        int start=0;
+        int end=word.length()-1;
 
-        for(int i=0; i<(len/2); i++){
-            if(word.charAt(i)!=word.charAt(len-i-1)) return false;
+        while(start <=end){
+            if(word.charAt(start)!=word.charAt(end)) return false;
+            start++;
+            end--;
         }
         return true;
     }
