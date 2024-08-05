@@ -9,8 +9,8 @@ class Solution {
         int end = word.length() - 1;
 
         while (start < end) {
-            char startChar = Character.toLowerCase(word.charAt(start));
-            char endChar = Character.toLowerCase(word.charAt(end));
+            char startChar =word.charAt(start);
+            char endChar = word.charAt(end);
             boolean startContinue=false;
 
             if (!(Character.isDigit(startChar) || Character.isAlphabetic(startChar))) {
@@ -24,7 +24,8 @@ class Solution {
             }
 
             if(startContinue) continue;
-
+            startChar = Character.toLowerCase(word.charAt(start));
+            endChar = Character.toLowerCase(word.charAt(end));
             if (startChar != endChar) {
                 return false;
             }
