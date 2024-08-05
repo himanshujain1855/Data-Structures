@@ -9,11 +9,9 @@ class Solution {
         }
 
         int count=0;
-        
-        String firstStr="";
 
         for(int i=0;i<len;i++){
-            if(freqMap.getOrDefault(arr[i],0)==1){
+            if(freqMap.get(arr[i])==1){
                 count++;
                 if(count==k) return arr[i];
             }
