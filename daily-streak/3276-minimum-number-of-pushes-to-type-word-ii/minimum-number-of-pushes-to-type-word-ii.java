@@ -10,7 +10,7 @@ class Solution {
         int pushes = 0;
 
         for (int i = 25; i >= 0; i--) {
-            int mul;
+            int mul=4;
             int mulDeciderIndex = 25 - i;
 
             if (mulDeciderIndex <= 7) {
@@ -19,8 +19,6 @@ class Solution {
                 mul = 2;
             } else if (mulDeciderIndex <= 23) {
                 mul = 3;
-            } else {
-                mul = 4;
             }
             pushes += (mul * chars[i]);
         }
