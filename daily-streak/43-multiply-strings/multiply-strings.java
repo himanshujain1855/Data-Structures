@@ -35,12 +35,14 @@ class Solution {
         while(lenMul>=0){
             int ans = ((mul.charAt(lenMul--) - '0') * digit) + car;
             car = ans / 10;
-            ansSb.insert(0, ans % 10);
+            ansSb.append(ans % 10);
         }
 
         if (car > 0) {
-            ansSb.insert(0, car);
+            ansSb.append( car);
         }
+        
+        ansSb=ansSb.reverse();
 
         for (int i = 0; i < zeros; i++) {
             ansSb.append("0");
