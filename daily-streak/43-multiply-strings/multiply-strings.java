@@ -51,31 +51,19 @@ class Solution {
     }
 
     static StringBuilder add(String num1, String num2) {
-        if (Objects.equals(num1, "0"))
-            return new StringBuilder(num2);
-        if (Objects.equals(num2, "0"))
-            return new StringBuilder(num1);
-
         int lenNum1 = num1.length() - 1;
         int lenNum2 = num2.length() - 1;
 
         StringBuilder ansSb = new StringBuilder();
         int car = 0;
 
-        while (lenNum1 >= 0 || lenNum2 >= 0) {
-            int d1 = lenNum1 >= 0 ? Integer.parseInt(num1.charAt(lenNum1) + "") : 0;
-            int d2 = lenNum2 >= 0 ? Integer.parseInt(num2.charAt(lenNum2) + "") : 0;
+        while (lenNum1 >= 0 || lenNum2 >= 0 || car==1) {
+            int d1 = lenNum1 >= 0 ? num1.charAt(lenNum1--) - '0' : 0;
+            int d2 = lenNum2 >= 0 ? num2.charAt(lenNum2--) - '0' : 0;
             int add = d1 + d2 + car;
             car = add / 10;
             ansSb.insert(0, add % 10);
-            lenNum2--;
-            lenNum1--;
-
         }
-        if (car == 1) {
-            ansSb.insert(0, 1);
-        }
-
         return ansSb;
     }
 }
