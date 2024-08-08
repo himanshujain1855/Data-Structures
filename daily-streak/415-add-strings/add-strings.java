@@ -9,8 +9,8 @@ class Solution {
 
         while (iA >= 0 || iB >= 0 || carry == 1) {
             int sum = carry;
-            int d1 = (iA >= 0) ? Integer.parseInt(num1.charAt(iA--) + "") : 0;
-            int d2 = (iB >= 0) ? Integer.parseInt(num2.charAt(iB--) + "") : 0;
+            int d1 = (iA >= 0) ? num1.charAt(iA--) - '0' : 0;
+            int d2 = (iB >= 0) ? num2.charAt(iB--) - '0' : 0;
             sum = sum + d1 + d2;
             carry = sum / 10;
             ansSb.append(sum % 10);
