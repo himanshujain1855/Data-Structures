@@ -28,15 +28,14 @@ class Solution {
         if (digit == 1 && zeros == 0)
             return mul;
         StringBuilder ansSb = new StringBuilder();
-        int lenMul = mul.length();
+        int lenMul = mul.length()-1;
 
         int car = 0;
 
-        for (int i = lenMul - 1; i >= 0; i--) {
-            int ans = Integer.parseInt(mul.charAt(i) + "") * digit + car;
+        while(lenMul>=0){
+            int ans = ((mul.charAt(lenMul--) - '0') * digit) + car;
             car = ans / 10;
             ansSb.insert(0, ans % 10);
-
         }
 
         if (car > 0) {
