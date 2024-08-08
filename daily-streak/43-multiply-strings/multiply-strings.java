@@ -1,93 +1,59 @@
 class Solution {
-    public static String multiply(String num1, String num2) {
-        if (num1 == "0" || num2 == "0")
+    public String multiply(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0")) {
             return "0";
-        if (num1 == "1")
-            return num2;
-        if (num2 == "1")
-            return num1;
-
-        int lenNum1 = num1.length();
-        int lenNum2 = num2.length();
-        StringBuilder ansSb = new StringBuilder("0");
-
-        String mul;
-        String mulT;
-
-        if (lenNum1 >= lenNum2) {
-            mul = num1;
-            mulT = num2;
-        } else {
-            mul = num2;
-            mulT = num1;
         }
 
-        int lenMulT = mulT.length();
+        StringBuilder firstNumber = new StringBuilder(num1);
+        StringBuilder secondNumber = new StringBuilder(num2);
 
-        String temp;
+        // Reverse both the numbers.
+        firstNumber.reverse();
+        secondNumber.reverse();
 
-        for (int i = lenMulT - 1; i >= 0; i--) {
-            temp = multiply(mul, Integer.parseInt(mulT.charAt(i) + ""), lenMulT - i - 1);
-            ansSb = add(temp, ansSb.toString());
+        // To store the multiplication result of each digit of secondNumber with firstNumber.
+        int N = firstNumber.length() + secondNumber.length();
+        StringBuilder answer = new StringBuilder();
+        for (int i = 0; i < N; ++i) {
+            answer.append(0);
         }
 
-        return ansSb.toString();
-    }
+        for (int place2 = 0; place2 < secondNumber.length(); place2++) {
+            int digit2 = secondNumber.charAt(place2) - '0';
 
-    static String multiply(String mul, int digit, int zeros) {
-        if (digit == 0)
-            return "0";
-        if (digit == 1 && zeros == 0)
-            return mul;
-        StringBuilder ansSb = new StringBuilder();
-        int lenMul = mul.length();
+            // For each digit in secondNumber multiply the digit by all digits in firstNumber.
+            for (int place1 = 0; place1 < firstNumber.length(); place1++) {
+                int digit1 = firstNumber.charAt(place1) - '0';
 
-        int car = 0;
+                // The number of zeros from multiplying to digits depends on the
+                // place of digit2 in secondNumber and the place of the digit1 in firstNumber.
+                int currentPos = place1 + place2;
 
-        for (int i = lenMul - 1; i >= 0; i--) {
-            int ans = Integer.parseInt(mul.charAt(i) + "") * digit + car;
-            car = ans / 10;
-            ansSb.insert(0, ans % 10);
+                // The digit currently at position currentPos in the answer string
+                // is carried over and summed with the current result.
+                int carry = answer.charAt(currentPos) - '0';
+                int multiplication = digit1 * digit2 + carry;
 
+                // Set the ones place of the multiplication result.
+                answer.setCharAt(
+                    currentPos,
+                    (char) ((multiplication % 10) + '0')
+                );
+
+                // Carry the tens place of the multiplication result by
+                // adding it to the next position in the answer array.
+                int value =
+                    (answer.charAt(currentPos + 1) - '0') + multiplication / 10;
+                answer.setCharAt(currentPos + 1, (char) (value + '0'));
+            }
         }
 
-        if (car > 0) {
-            ansSb.insert(0, car);
+        // Pop excess 0 from the rear of answer.
+        if (answer.charAt(answer.length() - 1) == '0') {
+            answer.deleteCharAt(answer.length() - 1);
         }
 
-        for (int i = 0; i < zeros; i++) {
-            ansSb.append("0");
-        }
-
-        return ansSb.toString();
-    }
-
-    static StringBuilder add(String num1, String num2) {
-        if (Objects.equals(num1, "0"))
-            return new StringBuilder(num2);
-        if (Objects.equals(num2, "0"))
-            return new StringBuilder(num1);
-
-        int lenNum1 = num1.length() - 1;
-        int lenNum2 = num2.length() - 1;
-
-        StringBuilder ansSb = new StringBuilder();
-        int car = 0;
-
-        while (lenNum1 >= 0 || lenNum2 >= 0) {
-            int d1 = lenNum1 >= 0 ? Integer.parseInt(num1.charAt(lenNum1) + "") : 0;
-            int d2 = lenNum2 >= 0 ? Integer.parseInt(num2.charAt(lenNum2) + "") : 0;
-            int add = d1 + d2 + car;
-            car = add / 10;
-            ansSb.insert(0, add % 10);
-            lenNum2--;
-            lenNum1--;
-
-        }
-        if (car == 1) {
-            ansSb.insert(0, 1);
-        }
-
-        return ansSb;
+        answer.reverse();
+        return answer.toString();
     }
 }
