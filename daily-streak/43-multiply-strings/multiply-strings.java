@@ -39,7 +39,7 @@ class Solution {
             return "0";
         if (digit == 1 && zeros == 0)
             return mul;
-        String ansSb="";
+        StringBuilder ansSb = new StringBuilder();
         int lenMul = mul.length();
 
         int car = 0;
@@ -47,18 +47,19 @@ class Solution {
         for (int i = lenMul - 1; i >= 0; i--) {
             int ans = Integer.parseInt(mul.charAt(i) + "") * digit + car;
             car = ans / 10;
-            ansSb=(ans % 10) + ansSb;
+            ansSb.insert(0, ans % 10);
+
         }
 
         if (car > 0) {
-            ansSb=car + ansSb;
+            ansSb.insert(0, car);
         }
 
         for (int i = 0; i < zeros; i++) {
-            ansSb=ansSb + "0";
+            ansSb.append("0");
         }
 
-        return ansSb;
+        return ansSb.toString();
     }
 
     static StringBuilder add(String num1, String num2) {
