@@ -63,8 +63,8 @@ class Solution {
             int d2 = lenNum2 >= 0 ? num2.charAt(lenNum2--) - '0' : 0;
             int add = d1 + d2 + car;
             car = add / 10;
-            ansSb.insert(0, add % 10);
+            ansSb.append( add % 10);
         }
-        return ansSb;
+        return ansSb.reverse();
     }
 }
