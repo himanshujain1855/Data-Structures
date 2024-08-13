@@ -1,21 +1,20 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> subSets=new ArrayList();
-
-        int n=nums.length;
-        int nPow2= 1 << n;
-
-        for(int i=0;i<nPow2;i++){
-            List<Integer> subset=new ArrayList();
-
-            for(int j=0;j<n;j++){
-                if((i & (1 << j))!=0){
-                    subset.add(nums[j]);
-                }
-            }
-            subSets.add(subset);
-        } 
-
+        List<List<Integer>> subSets = new ArrayList();
+        powerSet(subSets, nums, new ArrayList(), 0, nums.length);
         return subSets;
+    }
+
+    static void powerSet(List<List<Integer>> subSets,int[] nums,List<Integer> subset,int i,int len)
+    {
+       if(i==len){
+            subSets.add(subset);
+            return;
+        }
+
+        powerSet(subSets, nums, subset , i+1, len);
+        List<Integer> subsetNew=new ArrayList<>(subset);
+        subsetNew.add(nums[i]);
+        powerSet(subSets, nums , subsetNew, i+1 , len);
     }
 }
