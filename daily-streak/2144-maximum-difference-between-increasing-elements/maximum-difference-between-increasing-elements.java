@@ -7,10 +7,15 @@ class Solution {
         int min=nums[0];
 
         for(int j=1;j<len;j++){
-            if(nums[j] > min){
-                maxDiff = Math.max(maxDiff,nums[j] - min);
+            int curr=nums[j];
+            if(curr > min){
+                if(curr - min > maxDiff){
+                    maxDiff = curr - min;
+                }
+                maxDiff = Math.max(maxDiff,curr - min);
+            }else{
+                min=curr;
             }
-            min = Math.min(min,nums[j]);
         }
 
         if (maxDiff == 0) {
