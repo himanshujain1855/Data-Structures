@@ -1,23 +1,12 @@
 class Solution {
     public static int longestAlternatingSubarray(int[] nums, int threshold) {
-        int n = nums.length;
-        int start = -1;
+         int n = nums.length;
+        int start = 0;
 
-        for (int i = 0; i < n; i++) {
-            if (nums[i] > threshold)
-                continue;
-            if (nums[i] % 2 == 0) {
-                start = i;
-                break;
-            }
-        }
-        if (start == -1)
-            return 0;
-
-        int max = 1;
-        int curr = 1;
-        boolean odd = true;
-        for (int i = start + 1; i < n; i++) {
+        int max = 0;
+        int curr = 0;
+        boolean odd = false;
+        for (int i = start; i < n; i++) {
             if (nums[i] > threshold) {
                 curr = 0;
                 odd = false;
@@ -33,7 +22,6 @@ class Solution {
                     odd = false;
                 } else {
                     curr = 1;
-                    odd = true;
                 }
             } else {
                 if (nums[i] % 2 == 0) {
