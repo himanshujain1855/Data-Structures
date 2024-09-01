@@ -4,11 +4,15 @@ class Solution {
         int baseSlen = baseS.length();
 
         int len = words.length;
+        
         List<String> ans=new ArrayList();
+
+        HashMap<Character,Boolean> map=new HashMap();
+
         for (int i = 0; i < baseSlen; i++) {
 
             char c = baseS.charAt(i);
-            
+            if(map.containsKey(c)) continue;
             boolean overallFound=true;
 
             for (int j = 1; j < len; j++) {
@@ -25,6 +29,7 @@ class Solution {
                 }
 
                 if(!found) {
+                    map.put(c,false);
                     overallFound=false;
                     break;
                 }
