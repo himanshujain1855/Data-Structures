@@ -1,51 +1,47 @@
 class Solution {
-    public List<String> commonChars(String[] words) {
-        String baseS = words[0];
-        int baseSlen = baseS.length();
+    // obersavation based solution
+
+    public static List<String> commonChars(String[] words) {
+        int lastIntersection[] = freq(words[0]);
 
         int len = words.length;
-        
-        List<String> ans=new ArrayList();
 
-        HashMap<Character,Boolean> map=new HashMap();
+        for (int i = 1; i < len; i++) {
+            lastIntersection = intersection(lastIntersection, freq(words[i]));
+        }
 
-        for (int i = 0; i < baseSlen; i++) {
+        List<String> ans = new ArrayList();
 
-            char c = baseS.charAt(i);
-            if(map.containsKey(c)) continue;
-            boolean overallFound=true;
-
-            for (int j = 1; j < len; j++) {
-                String temp = words[j];
-                int tempLen = temp.length();
-                boolean found=false;
-
-                for (int k = 0; k < tempLen; k++) {
-                    if(c==temp.charAt(k)) {
-                        found=true;
-                        words[j]=removeI(k,temp,tempLen);
-                        break;
-                    }
+        for (int i = 0; i < 26; i++) {
+            if (lastIntersection[i] > 0) {
+                char c = (char) (i + 97);
+                for (int j = 0; j < lastIntersection[i]; j++) {
+                    ans.add(c + "");
                 }
-
-                if(!found) {
-                    map.put(c,false);
-                    overallFound=false;
-                    break;
-                }
-            }
-
-            if(overallFound){
-                ans.add(baseS.charAt(i)+"");
             }
         }
-    
 
         return ans;
-
     }
 
-    String removeI(int i, String s, int len) {
-        return s.substring(0, i) + s.substring(i + 1, len);
+    public static int[] intersection(int a[], int b[]) {
+        int common[] = new int[26];
+
+        for (int i = 0; i < 26; i++) {
+            common[i] = Math.min(a[i], b[i]);
+        }
+
+        return common;
+    }
+
+    public static int[] freq(String str) {
+        int freq[] = new int[26];
+        int len = str.length();
+
+        for (int i = 0; i < len; i++) {
+            freq[str.charAt(i) - 97]++;
+        }
+
+        return freq;
     }
 }
