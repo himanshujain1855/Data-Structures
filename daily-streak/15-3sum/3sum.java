@@ -1,30 +1,38 @@
 class Solution {
     public static List<List<Integer>> threeSum(int[] nums) {
-        Set<List<Integer>> triplets = new HashSet<>();
+        List<List<Integer>> triplets = new ArrayList<>();
         int len = nums.length;
-        HashMap<Integer, Integer> numsMap = new HashMap<>();
 
-        for (int i = 0; i < len; i++) {
-            numsMap.put(nums[i], i);
-        }
+        Arrays.sort(nums);
 
-        for (int i = 0; i < len; i++) {
-            for (int j = i + 1; j < len; j++) {
-                int thirdElement = 0 - (nums[i] + nums[j]);
-                if (numsMap.containsKey(thirdElement)) {
-                    int index = numsMap.get(thirdElement);
-                    if (i != index && j != index) {
-                        List<Integer> triplet = new ArrayList<>();
-                        triplet.add(nums[i]);
-                        triplet.add(nums[j]);
-                        triplet.add(thirdElement);
-                        Collections.sort(triplet);
-                        triplets.add(triplet);
+        for (int i = 0; i < len - 2; i++) {
+            if (i != 0 && nums[i] == nums[i - 1]) continue;
+            int start = i + 1;
+            int end = len - 1;
+            while (start < end) {
+                int expectedTriplet = nums[i] + nums[start] + nums[end];
+
+                if (expectedTriplet == 0) {
+                    List<Integer> triplet = new ArrayList<>();
+                    triplet.add(nums[i]);
+                    triplet.add(nums[start]);
+                    triplet.add(nums[end]);
+                    triplets.add(triplet);
+                    while (start < end && nums[end] == nums[end - 1]) {
+                        end--;
                     }
-
+                    end--;
+                    while (start < end && nums[start] == nums[start + 1]) {
+                        start++;
+                    }
+                    start++;
+                } else if (expectedTriplet > 0) {
+                    end--;
+                } else {
+                    start++;
                 }
             }
         }
-        return new ArrayList<>(triplets);
+        return triplets;
     }
 }
