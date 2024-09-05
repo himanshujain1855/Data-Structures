@@ -15,15 +15,16 @@ class Solution {
 
                 if (expectedTriplet == 0) {
                     triplets.add(List.of(nums[i], nums[start], nums[end]));
-
-                    while (start < end && nums[end] == nums[end - 1]) {
+                    end--;
+                    start++;
+                    while (start < end && nums[end] == nums[end + 1]) {
                         end--;
                     }
-                    end--;
-                    while (start < end && nums[start] == nums[start + 1]) {
+
+                    while (start < end && nums[start] == nums[start - 1]) {
                         start++;
                     }
-                    start++;
+
                 } else if (expectedTriplet > 0) {
                     end--;
                 } else {
