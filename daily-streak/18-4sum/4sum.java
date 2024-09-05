@@ -4,11 +4,14 @@ class Solution {
         int len = nums.length;
         if (len < 4)
             return quadruplets;
-
         Arrays.sort(nums);
-        Set<List<Integer>> quadrupletsSet = new HashSet<>();
-        for (int l = 0; l < len - 3; l++) {
-            for (int i = l + 1; i < len - 2; i++) {
+
+        for (int l = 0; l < len; l++) {
+            if (l > 0 && nums[l] == nums[l - 1])
+                continue;
+            for (int i = l + 1; i < len; i++) {
+                if (i > l + 1 && nums[i] == nums[i - 1])
+                    continue;
                 int start = i + 1;
                 int end = len - 1;
                 while (start < end) {
@@ -16,15 +19,18 @@ class Solution {
                             + (double) nums[end];
 
                     if (expectedQuadruplet == target) {
-                        List<Integer> quadruplet = new ArrayList<>();
-                        quadruplet.add(nums[l]);
-                        quadruplet.add(nums[i]);
-                        quadruplet.add(nums[start]);
-                        quadruplet.add(nums[end]);
-                        Collections.sort(quadruplet);
-                        quadrupletsSet.add(quadruplet);
+                        quadruplets.add(List.of(nums[l],nums[i], nums[start], nums[end]));
                         end--;
                         start++;
+
+                        while (start < end && nums[end] == nums[end + 1]) {
+                            end--;
+                        }
+
+                        while (start < end && nums[start] == nums[start - 1]) {
+                            start++;
+                        }
+
                     } else if (expectedQuadruplet > target) {
                         end--;
                     } else {
@@ -33,7 +39,6 @@ class Solution {
                 }
             }
         }
-        quadruplets.addAll(quadrupletsSet);
         return quadruplets;
     }
 }
