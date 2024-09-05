@@ -7,8 +7,10 @@ class Solution {
         Integer currNearSum = null;
         for (int i = 0; i < len; i++) {
 
-            int lo = i + 1;
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
 
+            int lo = i + 1;
             int hi = len - 1;
 
             while (lo < hi) {
