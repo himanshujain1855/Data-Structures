@@ -1,8 +1,13 @@
 class Solution {
     public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
         int count = 0;
-
         int n = nums1.length;
+
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        Arrays.sort(nums3);
+        Arrays.sort(nums4);
+        
         HashMap<Integer, Integer> nums3Plus4Map = new HashMap();
 
         for (int i = 0; i < n; i++) {
