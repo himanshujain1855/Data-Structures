@@ -23,10 +23,7 @@ class Solution {
                         end--;
                         start++;
 
-                        while (start < end && nums[end] == nums[end + 1]) {
-                            end--;
-                        }
-
+                
                         while (start < end && nums[start] == nums[start - 1]) {
                             start++;
                         }
