@@ -12,11 +12,11 @@ class Solution {
         int wordsLen=words.length;
 
         for(int i=0;i<wordsLen;i++){
-            int wordLen=words[i].length();
+            String word=words[i];
+            int wordLen=word.length();
             boolean allPass=true;
-
             for(int j=0;j<wordLen;j++){
-                if(arr[words[i].charAt(j)-97]!=1) {
+                if(arr[word.charAt(j)-97]!=1) {
                     allPass=false;
                     break;
                 }
