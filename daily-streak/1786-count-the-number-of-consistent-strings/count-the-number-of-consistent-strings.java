@@ -14,15 +14,16 @@ class Solution {
         for(int i=0;i<wordsLen;i++){
             String word=words[i];
             int wordLen=word.length();
-            boolean allPass=true;
+            int allContains=1;
+
             for(int j=0;j<wordLen;j++){
                 if(arr[word.charAt(j)-97]!=1) {
-                    allPass=false;
+                    allContains=0;
                     break;
                 }
             }
 
-            if(allPass) count++;
+            count+=allContains;
         }
 
         return count;
