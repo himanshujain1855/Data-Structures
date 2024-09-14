@@ -8,14 +8,15 @@ class Solution {
             return 1;
 
         int maxAndValue = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (nums[i] > maxAndValue)
-                maxAndValue = nums[i];
-        }
-
         int streak=0;
+
         for (int i = 0; i < n; i++) {
+            if (nums[i] > maxAndValue){
+                maxAndValue = nums[i];
+                streak=0;
+                ans=0;
+            }
+
             if(nums[i]==maxAndValue){
                 streak++;
                 if(streak>ans) ans=streak;
