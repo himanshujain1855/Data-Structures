@@ -1,30 +1,30 @@
 class Solution {
-    public int generateKey(int num1, int num2, int num3) {        
-        int counter=0;
+    public int generateKey(int num1, int num2, int num3) {
+        int counter = 0;
         StringBuilder strBuilder = new StringBuilder();
-        
-        int[] chars=new int[4];
 
-        while(counter < 4){
-            int d1=num1%10;
-            num1/=10;
+        int[] chars = new int[4];
 
-            int d2=num2%10;
-            num2/=10;
+        while (counter < 4) {
+            int d1 = num1 % 10;
+            num1 /= 10;
 
-            int d3=num3%10;
-            num3/=10;
+            int d2 = num2 % 10;
+            num2 /= 10;
 
-            int d=Math.min(Math.min(d1,d2),d3);
-            
-            chars[3-counter]=d ;
+            int d3 = num3 % 10;
+            num3 /= 10;
+
+            int d = Math.min(Math.min(d1, d2), d3);
+
+            chars[3 - counter] = d;
             counter++;
         }
-        StringBuilder sb=new StringBuilder();
+        int ans=0;
 
-        for(int i=0;i<4;i++){
-            sb.append(chars[i]+"");
+        for (int i = 0; i < 4; i++) {
+            ans= ans * 10 + chars[i];
         }
-         return Integer.parseInt(sb.toString());
+        return ans;
     }
 }
