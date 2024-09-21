@@ -2,6 +2,9 @@ class Solution {
     public int generateKey(int num1, int num2, int num3) {        
         int counter=0;
         StringBuilder strBuilder = new StringBuilder();
+        
+        int[] chars=new int[4];
+
         while(counter < 4){
             int d1=num1%10;
             num1/=10;
@@ -14,9 +17,14 @@ class Solution {
 
             int d=Math.min(Math.min(d1,d2),d3);
             
-            strBuilder.append(d+"");
+            chars[3-counter]=d ;
             counter++;
         }
-         return Integer.parseInt(strBuilder.reverse().toString());
+        StringBuilder sb=new StringBuilder();
+
+        for(int i=0;i<4;i++){
+            sb.append(chars[i]+"");
+        }
+         return Integer.parseInt(sb.toString());
     }
 }
